@@ -28,7 +28,7 @@ from vllm.entrypoints.openai.parser.harmony_utils import (
     render_for_completion,
 )
 from vllm.entrypoints.openai.parser.responses_parser import (
-    get_streamable_responses_parser,
+    get_responses_parser_for_simple_context,
 )
 from vllm.entrypoints.openai.protocol import (
     FunctionCall,
@@ -280,7 +280,7 @@ class ParsableContext(ConversationContext):
         if reasoning_parser_cls is None:
             raise ValueError("reasoning_parser_cls must be provided.")
 
-        self.parser = get_streamable_responses_parser(
+        self.parser = get_responses_parser_for_simple_context(
             tokenizer=tokenizer,
             response_messages=response_messages,
             reasoning_parser_cls=reasoning_parser_cls,
